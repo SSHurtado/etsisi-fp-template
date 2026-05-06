@@ -342,7 +342,7 @@
 % ===============================================
 \newcommand{\coverpage}[1]{%
   \clearpage
-  \thispagestyle{empty} % Set page style to empty
+  \thispagestyle{empty}%
   \ClearShipoutPicture
   % Add the cover image as a background covering the full page:
   \AddToShipoutPicture*{%
@@ -350,8 +350,8 @@
       \includegraphics[width=\paperwidth,height=\paperheight]{#1}%
     }%
   }%
-  \thispagestyle{empty}%
-  \clearpage%
+  \null
+  \clearpage
 }
 
 % ===============================================
