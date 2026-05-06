@@ -70,8 +70,8 @@ italic style.
 \label{subsubsec:third-level}
 
 Internal links, citations, and web links use different colors. For example, see
-\autoref{fig:single}, the table in \autoref{tab:class-features}, and the sample
-source in \cite{templatedataset}. A web link can be written with
+\autoref{fig:single}, the table examples in \autoref{sec:tables}, and the
+sample source in \cite{templatedataset}. A web link can be written with
 \href{https://www.overleaf.com/}{Overleaf}.
 
 \begin{tcolorbox}[
@@ -159,15 +159,24 @@ a landscape page instead.
 
 The \texttt{mytable} environment is defined in \texttt{tfg.cls}. Its arguments
 are placement, column specification, long caption, label, and an optional short
-caption for the list of tables.
+caption for the list of tables. In practice, that means the table below is read
+as a table with placement, column layout, caption, label, and optional short
+caption arguments.
+Use the class environment for most thesis tables because it already applies the
+caption width, row shading, and list-of-tables entry.
 
+\subsection{Default Class Table}
+\label{subsec:default-table}
+
+\setlength{\tabcolsep}{3pt}
 \renewcommand{\cellfont}{\footnotesize}
 \begin{mytable}[htbp]
-  {p{0.26\linewidth} p{0.34\linewidth} p{0.28\linewidth}}
-  {Main custom commands and environments exposed by \texttt{tfg.cls}.}
+  {p{0.34\linewidth} p{0.34\linewidth} p{0.20\linewidth}}
+  {Main custom commands and environments exposed by \texttt{tfg.cls}. This is
+  the recommended style for regular descriptive tables.}
   {tab:class-features}
   [Class features]
-  \thead{Feature} & \thead{Purpose} & \thead{Typical use} \\
+  \thead{Feature} & \thead{Purpose and arguments} & \thead{Typical use} \\
   \hline
   \texttt{\string\coverpage} & Creates a full-page image cover. &
   First page of the document. \\
@@ -184,12 +193,122 @@ caption for the list of tables.
   Reusable data tables. \\
 \end{mytable}
 \renewcommand{\cellfont}{\small}
+\setlength{\tabcolsep}{6pt}
+
+\subsection{Compact Numeric Table}
+\label{subsec:numeric-table}
+
+For metrics, ablation studies, or experiment summaries, a compact table with a
+colored header is usually easier to scan than wide text columns. The example in
+\autoref{tab:numeric-results} uses a normal \texttt{table} and \texttt{tabular}
+environment, while still using the class colors.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \captionsetup{width=0.85\linewidth}
+  \renewcommand{\arraystretch}{1.18}
+  \rowcolors{2}{rowshade}{white}
+  \begin{tabular}{l c c c c}
+    \rowcolor{sectionblue}
+    \textcolor{white}{\librefranklinbold Model} &
+    \textcolor{white}{\librefranklinbold MAE} &
+    \textcolor{white}{\librefranklinbold RMSE} &
+    \textcolor{white}{\librefranklinbold Time} &
+    \textcolor{white}{\librefranklinbold Rank} \\
+    Persistence & 0.184 & 0.271 & 0.1 s & 4 \\
+    Linear baseline & 0.132 & 0.206 & 0.4 s & 3 \\
+    Transformer small & 0.091 & 0.148 & 1.8 s & 2 \\
+    Transformer ensemble & \textbf{0.074} & \textbf{0.119} & 4.7 s & 1 \\
+  \end{tabular}
+  \rowcolors{2}{}{}
+  \renewcommand{\arraystretch}{1}
+  \caption[Compact numeric table]{Compact numeric table with a colored header,
+  alternating rows, and aligned metric columns.}
+  \label{tab:numeric-results}
+\end{table}
+
+\subsection{Decision Matrix}
+\label{subsec:decision-matrix}
+
+The decision matrix style in \autoref{tab:decision-matrix} is useful when you
+need to compare methods, datasets, risks, or tools across qualitative criteria.
+The first column is highlighted, and the criteria columns use concise labels so
+the table stays readable.
+
+\begin{table}[htbp]
+  \centering
+  \footnotesize
+  \captionsetup{width=\linewidth}
+  \renewcommand{\arraystretch}{1.25}
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{
+    >{\raggedright\arraybackslash}p{0.21\linewidth}
+    >{\centering\arraybackslash}p{0.13\linewidth}
+    >{\centering\arraybackslash}p{0.15\linewidth}
+    >{\centering\arraybackslash}p{0.17\linewidth}
+    >{\raggedright\arraybackslash}p{0.20\linewidth}
+  }
+    \rowcolor{headergray}
+    \thead{Option} & \thead{Cost} & \thead{Accuracy} & \thead{Explainability}
+    & \thead{Recommendation} \\
+    \hline
+    \cellcolor{rowshade}\librefranklinbold Baseline model &
+    Low & Medium & High & Keep as a sanity check. \\
+    \cellcolor{rowshade}\librefranklinbold Classical ML &
+    Medium & Medium & Medium & Useful for fast iteration. \\
+    \cellcolor{rowshade}\librefranklinbold Deep model &
+    High & High & Low & Use when performance justifies complexity. \\
+    \cellcolor{rowshade}\librefranklinbold Hybrid approach &
+    High & High & Medium & Strong candidate for final experiments. \\
+  \end{tabular}
+  \renewcommand{\arraystretch}{1}
+  \setlength{\tabcolsep}{6pt}
+  \caption[Decision matrix]{Decision matrix with a shaded option column and
+  compact qualitative criteria.}
+  \label{tab:decision-matrix}
+\end{table}
+
+\subsection{Milestone Table}
+\label{subsec:milestone-table}
+
+Use a milestone table when the document needs to explain the execution plan or
+show project progress. The grouped header in \autoref{tab:milestones} is made
+with \texttt{multicolumn}, which is available in standard LaTeX.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \captionsetup{width=0.92\linewidth}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{p{0.22\linewidth} p{0.18\linewidth} p{0.18\linewidth} p{0.28\linewidth}}
+    \rowcolor{sectionblue}
+    \multicolumn{4}{c}{\textcolor{white}{\librefranklinbold Example project schedule}} \\
+    \rowcolor{headergray}
+    \thead{Milestone} & \thead{Status} & \thead{Evidence} & \thead{Next action} \\
+    \hline
+    Literature review & \textcolor{sectionblue}{Done} & Annotated bibliography &
+    Move key references into \texttt{references.bib}. \\
+    Dataset preparation & \textcolor{reflinkcolor}{In progress} & Cleaning script &
+    Freeze the preprocessing version used in results. \\
+    Model evaluation & Pending & Experiment plan & Select final metrics and
+    comparison baselines. \\
+    Final manuscript & Pending & Template draft & Replace placeholder figures
+    and tables with project material. \\
+  \end{tabular}
+  \renewcommand{\arraystretch}{1}
+  \caption[Milestone table]{Milestone table with a grouped title row, status
+  colors, and action-oriented notes.}
+  \label{tab:milestones}
+\end{table}
 
 \section{Wide Material}
 \label{sec:wide}
 
-Use the \texttt{landscape} environment when a wide diagram or table would be
-too cramped on a portrait page.
+Use the \texttt{landscape} environment when a wide diagram or table would be too
+cramped on a portrait page. Wide tables should be reserved for material that
+genuinely benefits from side-by-side comparison; otherwise, split the table into
+smaller thematic tables.
 
 \begin{landscape}
 \begin{figure}[p]
@@ -200,6 +319,47 @@ too cramped on a portrait page.
   with the \texttt{pdflscape} package loaded by the class.}
   \label{fig:landscape}
 \end{figure}
+\end{landscape}
+
+\begin{landscape}
+\begin{table}[p]
+  \centering
+  \small
+  \captionsetup{width=0.88\linewidth}
+  \renewcommand{\arraystretch}{1.2}
+  \rowcolors{2}{rowshade}{white}
+  \begin{tabular}{
+    p{0.18\linewidth}
+    p{0.18\linewidth}
+    p{0.18\linewidth}
+    p{0.18\linewidth}
+    p{0.18\linewidth}
+  }
+    \rowcolor{sectionblue}
+    \textcolor{white}{\librefranklinbold Component} &
+    \textcolor{white}{\librefranklinbold Inputs} &
+    \textcolor{white}{\librefranklinbold Method} &
+    \textcolor{white}{\librefranklinbold Output} &
+    \textcolor{white}{\librefranklinbold Validation} \\
+    Data ingestion & Raw observations, metadata, timestamps &
+    Parsing, filtering, unit checks & Versioned analysis table &
+    Missing-value report and schema checks \\
+    Feature design & Clean time series and domain indicators &
+    Rolling windows, normalization, lag features & Training matrix &
+    Distribution plots and leakage checks \\
+    Model training & Training and validation splits &
+    Baseline comparison and selected architecture & Candidate models &
+    Metric table and residual analysis \\
+    Reporting & Final metrics, figures, and references &
+    TFG manuscript and reproducible build & Submitted report &
+    PDF review and bibliography audit \\
+  \end{tabular}
+  \rowcolors{2}{}{}
+  \renewcommand{\arraystretch}{1}
+  \caption[Landscape table]{Landscape table for workflow, architecture, or
+  experiment-pipeline summaries that need more horizontal space.}
+  \label{tab:landscape-table}
+\end{table}
 \end{landscape}
 
 \section{Bibliography}
