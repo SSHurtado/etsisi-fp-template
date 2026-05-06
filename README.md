@@ -1,7 +1,7 @@
 # ETSISI Final Project LaTeX Template
 
 Reusable LaTeX template for students of ETSI de Sistemas Informaticos
-(ETSISI), Universidad Politecnica de Madrid, preparing a Final Project or a similar academic report.
+(ETSISI), Universidad Politecnica de Madrid, to prepare a Final Project or a similar academic report.
 
 The template is based on `fp.cls` and includes an example `main.tex` showing
 how to use the available front matter, tables, figures, wrapped figures,
