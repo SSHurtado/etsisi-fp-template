@@ -1,10 +1,9 @@
-# ETSISI TFG LaTeX Template
+# ETSISI Final Project LaTeX Template
 
 Reusable LaTeX template for students of ETSI de Sistemas Informaticos
-(ETSISI), Universidad Politecnica de Madrid, preparing a Trabajo de Fin de
-Grado or a similar academic report.
+(ETSISI), Universidad Politecnica de Madrid, preparing a Final Project or a similar academic report.
 
-The template is based on `tfg.cls` and includes an example `main.tex` showing
+The template is based on `fp.cls` and includes an example `main.tex` showing
 how to use the available front matter, tables, figures, wrapped figures,
 landscape pages, hyperlinks, inline code styling, bibliography, and class color
 palette.
@@ -15,7 +14,7 @@ the text, license, cover, and metadata accordingly.
 
 ## What Is Included
 
-- `tfg.cls`: document class with the ETSISI-oriented visual style.
+- `fp.cls`: document class with the ETSISI-oriented visual style.
 - `main.tex`: complete example document using the main class features.
 - `references.bib`: bibliography file loaded by the class.
 - `images/covers/`: placeholder front and back covers.
@@ -29,7 +28,7 @@ the text, license, cover, and metadata accordingly.
 ```text
 .
 |-- main.tex
-|-- tfg.cls
+|-- fp.cls
 |-- references.bib
 |-- images
 |   |-- covers
@@ -68,7 +67,7 @@ the text, license, cover, and metadata accordingly.
 7. Add your bibliography entries to `references.bib`.
 8. Delete the example sections once you no longer need them.
 
-Keep the bibliography file named `references.bib`, because `tfg.cls` loads that
+Keep the bibliography file named `references.bib`, because `fp.cls` loads that
 file directly.
 
 ## Important Metadata
@@ -102,7 +101,7 @@ CC-BYSA
 For example, `\begin{licensepage}{CC-BYSA}` uses
 `images/licenses/CC-BYSA.png`.
 
-If your degree is not the one currently written in `tfg.cls`, update the fixed
+If your degree is not the one currently written in `fp.cls`, update the fixed
 degree text inside the `licensepage` environment before submitting.
 
 ## Table and Figure Examples
@@ -124,7 +123,7 @@ data and images with your own project material.
 
 ## Compile Locally
 
-Use LuaLaTeX or XeLaTeX. Do not use pdfLaTeX, because `tfg.cls` uses
+Use LuaLaTeX or XeLaTeX. Do not use pdfLaTeX, because `fp.cls` uses
 `fontspec` and OpenType fonts.
 
 With `latexmk`:

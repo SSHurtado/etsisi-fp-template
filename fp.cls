@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{tfg}[2025 TFG Formatted latex file]
+\ProvidesClass{fp}[2025 ETSISI final project formatted LaTeX class]
 
 % ===============================================
 % Packages
@@ -52,7 +52,7 @@
   linkcolor  = intlinkcolor,
   citecolor  = reflinkcolor,
   urlcolor   = weblinkcolor,
-  pdftitle   ={TFG}
+  pdftitle   ={Final Project}
 }
 
 
@@ -384,8 +384,8 @@
     \vspace{2.5cm}
     
     % Fixed text
-    TRABAJO DE FIN DE GRADO\\[0.5ex]
-    (Ingeniería de Software)\\[0.5ex]
+    FINAL PROJECT\\[0.5ex]
+    (ETSISI)\\[0.5ex]
     \vspace{0.5cm}
     % Date (#7)
     {\textit{#7}\par}% 
