@@ -360,6 +360,7 @@
 \newcommand{\GetLicenseImage}[1]{images/licenses/#1.png}
 
 \newenvironment{licensepage}[7]{%
+  \ClearShipoutPicture
   \begingroup
   \small
   \thispagestyle{empty}% Remove header/footer on this page
