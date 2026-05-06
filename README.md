@@ -1,9 +1,28 @@
-# TFG LaTeX Template
+# ETSISI TFG LaTeX Template
 
-This repository is a reusable LaTeX template based on `tfg.cls`. The example
-`main.tex` demonstrates the custom front matter, styled contents pages, figures,
-subfigures, wrapped figures, landscape visualizations, styled tables, inline
-code formatting, color palette, hyperlinks, and bibliography heading.
+Reusable LaTeX template for students of ETSI de Sistemas Informaticos
+(ETSISI), Universidad Politecnica de Madrid, preparing a Trabajo de Fin de
+Grado or a similar academic report.
+
+The template is based on `tfg.cls` and includes an example `main.tex` showing
+how to use the available front matter, tables, figures, wrapped figures,
+landscape pages, hyperlinks, inline code styling, bibliography, and class color
+palette.
+
+This repository is intended as a starting point. Before submitting your work,
+check the current ETSISI, degree, department, and tutor requirements, and adapt
+the text, license, cover, and metadata accordingly.
+
+## What Is Included
+
+- `tfg.cls`: document class with the ETSISI-oriented visual style.
+- `main.tex`: complete example document using the main class features.
+- `references.bib`: bibliography file loaded by the class.
+- `images/covers/`: placeholder front and back covers.
+- `images/licenses/`: Creative Commons license images used by `licensepage`.
+- `images/others/`: auxiliary images, such as a repository QR code.
+- `images/plots/`: placeholder figures used in the examples.
+- `latexmkrc`: local build configuration for LuaLaTeX.
 
 ## Project Structure
 
@@ -36,12 +55,85 @@ code formatting, color palette, hyperlinks, and bibliography heading.
 `-- README.md
 ```
 
-## Requirements
+## Start Using It
 
-Compile with LuaLaTeX or XeLaTeX. Do not use pdfLaTeX because `tfg.cls` uses
+1. Create your own copy of this repository.
+2. Open `main.tex`.
+3. Replace the placeholder title, subtitle, author, tutor, date, abstract, and
+   keywords.
+4. Replace `images/covers/cover.png` with your final A4 cover.
+5. Replace `images/others/codeQR.png` with a QR code for your code repository,
+   dataset, demo, or other project material.
+6. Add your figures under `images/plots/` or create new image folders.
+7. Add your bibliography entries to `references.bib`.
+8. Delete the example sections once you no longer need them.
+
+Keep the bibliography file named `references.bib`, because `tfg.cls` loads that
+file directly.
+
+## Important Metadata
+
+The license page is configured in `main.tex` with:
+
+```tex
+\begin{licensepage}{CC-BYSA}
+  {YOUR PROJECT TITLE\\[0.5ex]
+   A short subtitle that explains the scope of the work.}
+  {Your Name}
+  {Tutor Name}
+  {...}
+  {...}
+  {Madrid, Month 2026}
+\end{licensepage}
+```
+
+Available license keys are the filenames in `images/licenses/` without `.png`:
+
+```text
+CC-0
+CC-BY
+CC-BYND
+CC-BYNC
+CC-BYNCND
+CC-BYNCSA
+CC-BYSA
+```
+
+For example, `\begin{licensepage}{CC-BYSA}` uses
+`images/licenses/CC-BYSA.png`.
+
+If your degree is not the one currently written in `tfg.cls`, update the fixed
+degree text inside the `licensepage` environment before submitting.
+
+## Table and Figure Examples
+
+`main.tex` includes several examples that students can copy and adapt:
+
+- Standard figure with a short list-of-figures caption.
+- Subfigure layout for comparing two visuals.
+- Wrapped figure beside text.
+- Landscape figure for wide visualizations.
+- Default class table using `mytable`.
+- Compact numeric results table.
+- Decision matrix table.
+- Milestone/status table.
+- Landscape table for wide comparisons.
+
+These examples are meant to demonstrate syntax and style. Replace the sample
+data and images with your own project material.
+
+## Compile Locally
+
+Use LuaLaTeX or XeLaTeX. Do not use pdfLaTeX, because `tfg.cls` uses
 `fontspec` and OpenType fonts.
 
-The bibliography uses `biblatex`, so the complete build sequence is:
+With `latexmk`:
+
+```sh
+latexmk main.tex
+```
+
+Manual build sequence:
 
 ```sh
 lualatex main.tex
@@ -50,39 +142,23 @@ lualatex main.tex
 lualatex main.tex
 ```
 
-If you use `latexmk`, run:
+If the table of contents, list of figures, list of tables, or bibliography does
+not appear correctly on the first build, compile again.
 
-```sh
-latexmk main.tex
-```
+## Use It in Overleaf
 
-## Start a Thesis From This Template
-
-1. Replace the metadata in the `licensepage` block in `main.tex`.
-2. Replace `images/covers/cover.png` with your own A4 cover.
-3. Replace `images/others/codeQR.png` with a QR code or repository image.
-4. Add your figures under `images/plots/` or create new image folders.
-5. Add your sources to `references.bib`.
-6. Keep the bibliography file named `references.bib`, because `tfg.cls` loads it
-   directly.
-
-The license image is selected by the first argument of `licensepage`. For
-example, `\begin{licensepage}{CC-BYSA}` uses
-`images/licenses/CC-BYSA.png`.
-
-## Overleaf
-
-Recommended path:
+Recommended workflow:
 
 1. Download this repository as a `.zip` file from GitHub.
 2. In Overleaf, choose **New Project** and then **Upload Project**.
-3. Upload the `.zip`; Overleaf preserves folders from the archive.
-4. Open the project menu and set the compiler to **LuaLaTeX** or **XeLaTeX**.
-5. Recompile. Run again if the table of contents, figure list, table list, or
-   bibliography needs another pass.
+3. Upload the `.zip`; Overleaf keeps the folder structure.
+4. Open the Overleaf project menu.
+5. Set the compiler to **LuaLaTeX** or **XeLaTeX**.
+6. Recompile. Run again if references, lists, or bibliography are still being
+   generated.
 
-If your Overleaf account supports GitHub import, you can also choose **New
-Project** and **Import from GitHub**, then select the repository.
+If your Overleaf account supports GitHub import, you can also choose
+**New Project** and **Import from GitHub**, then select your repository.
 
 Useful Overleaf references:
 
@@ -95,15 +171,45 @@ Useful Overleaf references:
 - Git integration:
   <https://docs.overleaf.com/integrations-and-add-ons/git-integration-and-github-synchronization/git>
 
-## Publish to GitHub
+## Publish Your Copy to GitHub
 
-After creating an empty GitHub repository, connect this local repository and
-push it:
+After creating an empty GitHub repository, connect your local copy and push it:
 
 ```sh
-git remote add origin git@github.com:YOUR-USER/tfg-latex-template.git
+git remote add origin git@github.com:YOUR-USER/YOUR-REPOSITORY.git
 git branch -M main
 git push -u origin main
 ```
 
-Use HTTPS instead of SSH if that is how you authenticate with GitHub.
+Use HTTPS instead of SSH if that is how you authenticate with GitHub:
+
+```sh
+git remote add origin https://github.com/YOUR-USER/YOUR-REPOSITORY.git
+git branch -M main
+git push -u origin main
+```
+
+## Submission Checklist
+
+Before submitting your report:
+
+- Replace all placeholder text.
+- Replace the sample figures and tables.
+- Confirm the author, tutor, degree, school, and date are correct.
+- Confirm the selected license is the one you want to use.
+- Check that every citation appears in the bibliography.
+- Check that every figure and table is referenced in the text.
+- Compile from a clean project in Overleaf or locally.
+- Review the final PDF page by page.
+
+## Notes for ETSISI Students
+
+- Keep the repository structure simple so Overleaf can compile it reliably.
+- Use descriptive filenames for figures and avoid spaces in file names.
+- Store source code, datasets, and experiments in a separate repository if they
+  are too large or not needed for the PDF build.
+- Do not commit generated LaTeX files such as `.aux`, `.bbl`, `.log`, `.toc`,
+  `.lof`, `.lot`, or the compiled `.pdf` unless your tutor explicitly asks for
+  them.
+- Treat this template as a writing aid, not as a substitute for the official
+  academic instructions for your degree.
